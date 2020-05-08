@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %}</title>
+
+        <!-- meta -->
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <meta name="viewport" content="width=device-width,initial-scale=1">
+        <!-- /meta -->
+
+        <!-- styles -->
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+        
+        <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+        
+        <!-- Custom styles for this template -->
+        <link href="/static/css/cover.css" rel="stylesheet">
+        
+           <!-- /styles -->
+
+        <!-- favicons -->
+        <link rel="shortcut icon" href="/static/ico/favicon.png">
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/ico/apple-touch-icon-144-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/ico/apple-touch-icon-114-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/ico/apple-touch-icon-72-precomposed.png">
+        <link rel="apple-touch-icon-precomposed" href="/static/ico/apple-touch-icon-57-precomposed.png">
+        <link rel="shortcut icon" href="/static/ico/favicon.png">
+        <!-- /favicons -->
+
+        
+
+    </head>
+    <body>
+
+
+
+        <div class="site-wrapper">
+
+            <div class="site-wrapper-inner">
+      
+              <div class="cover-container">
+
+                <div class="masthead clearfix">
+                    <div class="inner">
+                        <h1 class="masthead-brand">Mission Call Prediction</h1>
+                    </div>
+                </div>
+                <div class="inner cover">
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- <div class="mastfoot">
+                    <div class="inner">
+                        <p>Cover template for <a href="https://getbootstrap.com/">Bootstrap</a>, by <a href="https://twitter.com/mdo">@mdo</a>.</p>
+                    </div>
+                </div> -->
+        
+
+
+                
+
+               
+             
+
+
+            </div>
+        </div>
+
+        
+        
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script>
+        
+        <script type="text/javascript" src="/static/js/script.js" defer></script>
+        
+        <!-- Latest compiled and minified bootstrap JavaScript -->
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+        <!-- Bing maps -->
+        <script type='text/javascript' src='https://www.bing.com/api/maps/mapcontrol?key={{ config.map_api_key }}?' ></script>
+        
+    </body>
+</html>
