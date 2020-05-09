@@ -9,6 +9,8 @@ import psycopg2
 
 app = Flask(__name__)
 
+map_api_key = os.environ.get("MAP_API_KEY") or "MISISNG"
+db_conn = os.environ.get("DB_CONN_STRING") or "MISSING"
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
@@ -69,7 +71,6 @@ if __name__ == "__main__":
 
     # map_api_key = args.map_key or os.environ.get("MAP_API_KEY")
     # db_conn = args.connection_string or os.environ.get("DB_CONN_STRING")
-    map_api_key = os.environ.get("MAP_API_KEY") or "MISISNG"
-    db_conn = os.environ.get("DB_CONN_STRING") or "MISSING"
+    
 
     app.run()
