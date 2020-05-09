@@ -69,7 +69,7 @@ if __name__ == "__main__":
 
     # map_api_key = args.map_key or os.environ.get("MAP_API_KEY")
     # db_conn = args.connection_string or os.environ.get("DB_CONN_STRING")
-    map_api_key = os.environ.get("MAP_API_KEY")
-    db_conn = os.environ.get("DB_CONN_STRING")
+    map_api_key = os.environ.get("MAP_API_KEY") or "MISISNG"
+    db_conn = os.environ.get("DB_CONN_STRING") or "MISSING"
 
     app.run()
