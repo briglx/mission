@@ -60,14 +60,16 @@ def home():
 
 # Default port:
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Predict mission call location.", add_help=True,
-    )
-    parser.add_argument("--map_key", "-k", help="map api key")
-    parser.add_argument("--connection_string", "-s", help="db connection string")
-    args = parser.parse_args()
+    # parser = argparse.ArgumentParser(
+    #     description="Predict mission call location.", add_help=True,
+    # )
+    # parser.add_argument("--map_key", "-k", help="map api key")
+    # parser.add_argument("--connection_string", "-s", help="db connection string")
+    # args = parser.parse_args()
 
-    map_api_key = args.map_key or os.environ.get("MAP_API_KEY")
-    db_conn = args.connection_string or os.environ.get("DB_CONN_STRING")
+    # map_api_key = args.map_key or os.environ.get("MAP_API_KEY")
+    # db_conn = args.connection_string or os.environ.get("DB_CONN_STRING")
+    map_api_key = os.environ.get("MAP_API_KEY")
+    db_conn = os.environ.get("DB_CONN_STRING")
 
     app.run()
