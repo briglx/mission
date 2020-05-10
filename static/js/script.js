@@ -18,7 +18,6 @@ function GetMap() {
 
     map = new Microsoft.Maps.Map('#myMap', {
         credentials: mapApiKey,
-        // credentials: 'AviJNgWitTm1YmZThkDjdggxIriJhFM98CDxAJe_-Ri3UKcfwothtEivTbwqe7ZB',
         center: new Microsoft.Maps.Location(0,0),
         zoom: 3,
     });
