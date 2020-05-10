@@ -25,6 +25,7 @@ def json_serial(obj):
 def get_predictions():
     """Return the list of predications as a json object"""
     results = []
+    conn = None
 
     columns = ("pid", "name", "location", "latitude", "longitude", "type", "modtime")
 

@@ -22,3 +22,5 @@ Look at current docker logs
 
 # References
 - Bing Map Auto-suggest https://www.bing.com/api/maps/sdkrelease/mapcontrol/isdk/autosuggestui
+- Setup Custom domain for Web app https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
+- Configure Bing Map Security https://blogs.bing.com/maps/2018-05/Announcing-Enhanced-Security-for-Bing-Maps-API-Keys
