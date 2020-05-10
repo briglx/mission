@@ -3,6 +3,7 @@
 import os
 import argparse
 import json
+import pprint
 from datetime import date, datetime, timezone
 from flask import Flask, render_template, Response, request
 import psycopg2
@@ -11,6 +12,20 @@ app = Flask(__name__)
 
 map_api_key = os.environ.get("MAP_API_KEY") or "MISISNG"
 db_conn = os.environ.get("DB_CONN_STRING") or "MISSING"
+
+class LoggingMiddleware(object):
+    def __init__(self, app):
+        self._app = app
+
+    def __call__(self, environ, resp):
+        errorlog = environ['wsgi.errors']
+        pprint.pprint(('REQUEST', environ), stream=errorlog)
+
+        def log_response(status, headers, *args):
+            pprint.pprint(('RESPONSE', status, headers), stream=errorlog)
+            return resp(status, headers, *args)
+
+        return self._app(environ, log_response)
 
 def json_serial(obj):
     """JSON serializer for objects not serializable by default json code"""
@@ -112,5 +127,6 @@ if __name__ == "__main__":
     # map_api_key = args.map_key or os.environ.get("MAP_API_KEY")
     # db_conn = args.connection_string or os.environ.get("DB_CONN_STRING")
     
+    app.wsgi_app = LoggingMiddleware(app.wsgi_app)
 
     app.run()
