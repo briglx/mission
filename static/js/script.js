@@ -9,6 +9,32 @@ function selectedSuggestion(suggestionResult) {
     var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
     predictions.push(pushpin)
     map.entities.push(predictions)
+
+    // Save to db
+    var loc = {
+        name: 'Unknown', 
+        location: suggestionResult.title,
+        latitude: suggestionResult.location.latitude,
+        longitude: suggestionResult.location.longitude,
+        type: 'Guess'
+    }
+
+    jQuery.ajax({
+        url: "/api/predictions",
+        type:"POST",
+        data: JSON.stringify(loc),
+        contentType:"application/json",
+        dataType:"json",
+        success: function(d){
+            console.log( "Data Loaded: " + d );
+        }
+      })
+
+    // jQuery.post( "/api/predictions", loc)
+    //     .done(function( data ) {
+    //         alert( "Data Loaded: " + data );
+    //     });
+
     console.log(predictions.length)
 }
 

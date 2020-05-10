@@ -4,7 +4,7 @@ import os
 import argparse
 import json
 from datetime import date, datetime, timezone
-from flask import Flask, render_template, Response
+from flask import Flask, render_template, Response, request
 import psycopg2
 
 app = Flask(__name__)
@@ -21,7 +21,46 @@ def json_serial(obj):
     raise TypeError("Type %s not serializable" % type(obj))
 
 
-@app.route("/api/predictions")
+@app.route("/api/predictions", methods=['POST'])
+def save_prediction():
+
+    conn = None
+    new_pid = None
+    mod_date = None
+
+    req_data = request.get_json()
+    print(req_data)
+    # json_str = json.dumps(results, indent=2, sort_keys=True, default=json_serial)
+
+    try:
+        conn = psycopg2.connect(db_conn)
+        # create a cursor
+        cur = conn.cursor()
+
+        sql_string = "INSERT INTO predictions (pid, name, location, latitude, longitude, type) VALUES (DEFAULT, %s, %s, %s, %s, %s) RETURNING pid, modtime;"
+        cur.execute(sql_string, (req_data['name'], req_data['location'], str(req_data['latitude']), str(req_data['longitude']), req_data['type']))
+        new_rec = cur.fetchone()
+        new_pid = new_rec[0]
+        mod_date = new_rec[1]
+        
+        conn.commit()
+        cur.close()
+
+    except (Exception, psycopg2.DatabaseError) as error:
+        print(error)
+    finally:
+        if conn is not None:
+            conn.close()
+            print("Database connection closed.")
+
+    req_data["pid"] = new_pid
+    req_data["mod_date"] = mod_date
+    json_str = json.dumps(req_data, indent=2, sort_keys=True, default=json_serial)
+
+    return Response(json_str, mimetype="application/json")
+
+
+@app.route("/api/predictions", methods=['GET'])
 def get_predictions():
     """Return the list of predications as a json object"""
     results = []
