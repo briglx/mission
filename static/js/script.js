@@ -13,6 +13,11 @@ function selectedSuggestion(suggestionResult) {
         player_name = "Unknown"
     }
 
+    map.setView({
+        center: suggestionResult.location,
+        zoom: 5
+    });
+
 
     map.entities.clear();
     var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location,
