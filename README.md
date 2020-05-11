@@ -16,7 +16,7 @@ The Bing test environment key is `AjtUzWJBHlI3Ma_Ke6Qv2fGRXEs0ua5hUQi54ECwfXTiWs
 
 # Debug on Azure App Service
 
-Navigate to https://appname.scm.azurewebsites.net/ to view web app tools 
+Navigate to Advanced Tools and click on Go to view web app tools 
 
 Look at current docker logs
 
