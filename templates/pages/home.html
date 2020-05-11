@@ -2,16 +2,19 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 
-<div class="row">
-  <div class="col-md-3">
-    <h3>Enter Your Prediction</h3>
-    <div id='searchBoxContainer'>
-      <input type="text" class="form-control" id="searchBox" placeholder="location">
-    </div>
+
+
+  <div class="playerContainer">
+    <h1>Enter Your Prediction</h1>
+    <input type="text" class="form-control" id="playerName" placeholder="Type in your name">
+    <input type="text" class="form-control" id="searchBox" placeholder="Type in your Guess">
+    <div id='searchBoxContainer'></div>
   </div>
-  <div class="col-md-9">
-    <div id="myMap"></div>
-  </div>    
-</div>
+
+
+<div class="mapContainer">
+  <div id="myMap"></div>
+</div>  
+
 
 {% endblock %}

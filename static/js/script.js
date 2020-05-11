@@ -5,14 +5,28 @@ var predictions = [];
 
 function selectedSuggestion(suggestionResult) {
     console.log("Adding selections")
+
+    // Get player name
+    var player_name = jQuery("#playerName").val()
+
+    if (player_name == ""){
+        player_name = "Unknown"
+    }
+
+
     map.entities.clear();
-    var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location);
+    var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location,
+        {
+            title: player_name,
+            subTitle: suggestionResult.title,
+            text: ""
+        });
     predictions.push(pushpin)
     map.entities.push(predictions)
 
     // Save to db
     var loc = {
-        name: 'Unknown', 
+        name: player_name, 
         location: suggestionResult.title,
         latitude: suggestionResult.location.latitude,
         longitude: suggestionResult.location.longitude,
@@ -57,7 +71,11 @@ jQuery(window).on('load', function() {
         // Add pin to map
         for (var i = 0; i < data.length; i++) {
             var loc = new Microsoft.Maps.Location(data[i].latitude, data[i].longitude)
-            var pushpin = new Microsoft.Maps.Pushpin(loc);
+            var pushpin = new Microsoft.Maps.Pushpin(loc, {
+                title: data[i].name,
+                subTitle: data[i].location,
+                text: ""
+            });
             predictions.push(pushpin)
         }
         map.entities.push(predictions)
