@@ -117,7 +117,12 @@ def home():
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static', 'ico'),
-                               'favicon.ico', mimetype='image/png')
+                               'favicon.ico', mimetype='text/x-icon')
+
+@app.route('/apple-touch-icon.png')
+def apple_touch_icon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'ico'),
+                               'apple-touch-icon.png', mimetype='image/png')
 
 @app.route('/site.webmanifest')
 def webmanifest():
