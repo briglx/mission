@@ -1,5 +1,7 @@
 /* stylelint-disable property-no-vendor-prefix */
 
+
+
 /*
  * Globals
  */
@@ -52,7 +54,7 @@ h1, h2, h3 {
 }
 
 #playerName{
-  box-sizing: content-box;
+  sbox-sizing: content-box;
 }
 
 .form-control{

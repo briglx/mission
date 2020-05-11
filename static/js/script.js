@@ -7,7 +7,7 @@ function selectedSuggestion(suggestionResult) {
     console.log("Adding selections")
 
     // Get player name
-    var player_name = jQuery("#playerName").val()
+    var player_name = $("#playerName").val()
 
     if (player_name == ""){
         player_name = "Unknown"
@@ -33,7 +33,7 @@ function selectedSuggestion(suggestionResult) {
         type: 'Guess'
     }
 
-    jQuery.ajax({
+    $.ajax({
         url: "/api/predictions",
         type:"POST",
         data: JSON.stringify(loc),
@@ -64,10 +64,10 @@ function GetMap() {
     
 }
 
-jQuery(window).on('load', function() {
+$(window).on('load', function() {
 
     // Show saved predictions
-    jQuery.get("/api/predictions", function(data ){
+    $.get("/api/predictions", function(data ){
         // Add pin to map
         for (var i = 0; i < data.length; i++) {
             var loc = new Microsoft.Maps.Location(data[i].latitude, data[i].longitude)
@@ -96,6 +96,6 @@ jQuery(window).on('load', function() {
 
 });
 
-jQuery("#searchBox").click(function(el){
-    jQuery("#searchBox").val('')
+$("#searchBox").click(function(el){
+    $("#searchBox").val('')
 })
