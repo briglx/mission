@@ -1,6 +1,6 @@
 'use strict';
 
-var map;
+var map, clusterLayer, infobox;
 var predictions = [];
 
 function selectedSuggestion(suggestionResult) {
@@ -66,10 +66,69 @@ function GetMap() {
         center: new Microsoft.Maps.Location(0,0),
         zoom: 3,
     });
+    infobox = new Microsoft.Maps.Infobox(map.getCenter(), { visible: false });
+    infobox.setMap(map);
     
 }
 
+function pushpinClicked(e) {
+    //Show an infobox when a pushpin is clicked.
+    showInfobox(e.target);
+}
+
+function showInfobox(pin) {
+    var description = [];
+
+    //Check to see if the pushpin is a cluster.
+    if (pin.containedPushpins) {
+
+        //Create a list of all pushpins that are in the cluster.
+        description.push('<div>');
+        for (var i = 0; i < pin.containedPushpins.length; i++) {
+            description.push('<p>', pin.containedPushpins[i].getTitle(), '</p>');
+        }
+        description.push('</div>');
+    }
+
+    //Display an infobox for the pushpin.
+    infobox.setOptions({
+        title: pin.getTitle(),
+        location: pin.getLocation(),
+        description: description.join(''),
+        visible: true
+    });
+}
+
+function createCustomClusteredPin(cluster){
+
+    var minRadius = 12;
+	    var outlineWidth = 7;
+
+    var clusterSize = cluster.containedPushpins.length;
+    var radius = Math.log(clusterSize) / Math.log(10) * 5 + minRadius;
+    var fillColor = 'rgba(255, 40, 40, 0.5)';
+
+    var svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="', (radius * 2), '" height="', (radius * 2), '">',
+            '<circle cx="', radius, '" cy="', radius, '" r="', radius, '" fill="', fillColor, '"/>',
+            '<circle cx="', radius, '" cy="', radius, '" r="', radius - outlineWidth, '" fill="', fillColor, '"/>',
+            '</svg>'];
+    //Customize clustered pushpin.
+
+    cluster.setOptions({
+        icon: svg.join(''),
+        anchor: new Microsoft.Maps.Point(radius, radius),
+        description: "",
+        textOffset: new Microsoft.Maps.Point(0, radius - 8) //Subtract 8 to compensate for height of text.
+    });
+    Microsoft.Maps.Events.addHandler(cluster, 'click', pushpinClicked);
+    
+}
+
+
 $(window).on('load', function() {
+
+
+    
 
     // Show saved predictions
     $.get("/api/predictions", function(data ){
@@ -83,7 +142,21 @@ $(window).on('load', function() {
             });
             predictions.push(pushpin)
         }
-        map.entities.push(predictions)
+
+        
+        // map.entities.push(predictions)
+        console.log(predictions)
+
+
+        Microsoft.Maps.loadModule("Microsoft.Maps.Clustering", function () {
+            console.log("Clustering loaded ")
+
+            var pins = Microsoft.Maps.TestDataGenerator.getPushpins(1000, map.getBounds());
+
+            clusterLayer = new Microsoft.Maps.ClusterLayer(predictions, {
+                clusteredPinCallback: createCustomClusteredPin});
+            map.layers.insert(clusterLayer);
+        });
 
     });
 
