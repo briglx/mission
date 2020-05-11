@@ -57,7 +57,7 @@ h1, h2, h3 {
 
 .form-control{
   padding: 7px 0px 7px 0;
-  text-indent: 8px;
+  text-indent: 10px;
 
 
   display: block;
@@ -67,4 +67,5 @@ h1, h2, h3 {
   line-height: 17px;
   border: 0px;
   margin-bottom:3px;
+  border-radius: 25px;
 }
