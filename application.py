@@ -5,7 +5,7 @@ import argparse
 import json
 import pprint
 from datetime import date, datetime, timezone
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, send_from_directory
 import psycopg2
 
 app = Flask(__name__)
@@ -114,6 +114,20 @@ def home():
     config = {"map_api_key": map_api_key}
     return render_template("pages/home.html", config=config)
 
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static', 'ico'),
+                               'favicon.ico', mimetype='image/png')
+
+@app.route('/site.webmanifest')
+def webmanifest():
+    return send_from_directory(os.path.join(app.root_path),
+                               'site.webmanifest', mimetype='text/json')
+
+@app.route('/browserconfig.xml')
+def browserconfig():
+    return send_from_directory(os.path.join(app.root_path),
+                               'browserconfig.xml', mimetype='text/xml')
 
 # Default port:
 if __name__ == "__main__":

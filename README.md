@@ -20,6 +20,8 @@ Navigate to Advanced Tools and click on Go to view web app tools
 
 Look at current docker logs
 
+Test Favicon at https://realfavicongenerator.net/favicon_checker?
+
 # References
 - Bing Map Auto-suggest https://www.bing.com/api/maps/sdkrelease/mapcontrol/isdk/autosuggestui
 - Setup Custom domain for Web app https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
