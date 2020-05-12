@@ -106,7 +106,7 @@ function createCustomClusteredPin(cluster){
 
     var clusterSize = cluster.containedPushpins.length;
     var radius = Math.log(clusterSize) / Math.log(10) * 5 + minRadius;
-    var fillColor = 'rgba(255, 40, 40, 0.5)';
+    var fillColor = 'rgba(0, 38, 84, 0.5)';
 
     var svg = ['<svg xmlns="http://www.w3.org/2000/svg" width="', (radius * 2), '" height="', (radius * 2), '">',
             '<circle cx="', radius, '" cy="', radius, '" r="', radius, '" fill="', fillColor, '"/>',
@@ -133,12 +133,23 @@ $(window).on('load', function() {
     // Show saved predictions
     $.get("/api/predictions", function(data ){
         // Add pin to map
+        var color_blue = "#002654"
+        var color_red = "#CE1126"
+        var color = color_blue
+
         for (var i = 0; i < data.length; i++) {
             var loc = new Microsoft.Maps.Location(data[i].latitude, data[i].longitude)
+            
+            if (data[i].type == "Actual"){
+                color = color_red
+            }
+
+
             var pushpin = new Microsoft.Maps.Pushpin(loc, {
                 title: data[i].name,
                 subTitle: data[i].location,
-                text: ""
+                text: "",
+                color: color
             });
             predictions.push(pushpin)
         }

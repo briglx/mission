@@ -22,6 +22,13 @@ Look at current docker logs
 
 Test Favicon at https://realfavicongenerator.net/favicon_checker?
 
+# Colors
+
+Dark red 
+
+ - rgb(206  17  38)
+ - hex #CE1126
+
 # References
 - Bing Map Auto-suggest https://www.bing.com/api/maps/sdkrelease/mapcontrol/isdk/autosuggestui
 - Setup Custom domain for Web app https://docs.microsoft.com/en-us/azure/app-service/app-service-web-tutorial-custom-domain
