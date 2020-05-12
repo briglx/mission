@@ -114,21 +114,12 @@ h1, h2, h3 {
     width: 100%; 
 }
 
-.mapContainer {
 
-}
 .playerContainer{
   padding-bottom: 10px;
   z-index: 100;
 }
 
-#playerName{
-  
-}
-
-input {
-  border-radius: 0 !important; 
-}
 
 input.form-control{
   padding: 7px 0px 7px 0;
@@ -140,24 +131,22 @@ input.form-control{
   line-height: 17px;
   border: 0px;
   margin-bottom:10px;
-  border-radius: 0px !important; 
   box-sizing: content-box;
 
 }
 
-div#playerContainer input#searchBox{
-  /* background-color: red; */
+/* div#playerContainer input#searchBox{
   border-bottom-left-radius: 0px;
   border-bottom-right-radius: 0px;
   border-top-left-radius: 0px;
   border-top-right-radius: 0px;
-}
+} */
 
-div#playerContainer input#searchBox[style] {
+/* div#playerContainer input#searchBox[style] {
   border-radius: 0px !important; 
-}
+} */
 
-.round {
+/* .round {
   -webkit-border-top-left-radius: 1px;
   -webkit-border-top-right-radius: 2px;
   -webkit-border-bottom-right-radius: 3px;
@@ -172,4 +161,17 @@ div#playerContainer input#searchBox[style] {
   border-top-right-radius: 2px;
   border-bottom-right-radius: 3px;
   border-bottom-left-radius: 4px;
+} */
+
+@supports (-webkit-touch-callout: none) {
+  .form-control {
+    border-radius: 25px 
+  }
+  
+}
+
+@supports not (-webkit-touch-callout: none) {
+  .form-control {
+    border-radius: 0px 
+  } 
 }
