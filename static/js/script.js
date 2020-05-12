@@ -2,6 +2,8 @@
 
 var map, clusterLayer, infobox;
 var predictions = [];
+var color_blue = "#002654"
+var color_red = "#CE1126"
 
 function selectedSuggestion(suggestionResult) {
     console.log("Adding selections")
@@ -24,7 +26,8 @@ function selectedSuggestion(suggestionResult) {
         {
             title: player_name,
             subTitle: suggestionResult.title,
-            text: ""
+            text: "", 
+            color: color_blue
         });
     predictions.push(pushpin)
     map.entities.push(predictions)
@@ -133,8 +136,7 @@ $(window).on('load', function() {
     // Show saved predictions
     $.get("/api/predictions", function(data ){
         // Add pin to map
-        var color_blue = "#002654"
-        var color_red = "#CE1126"
+        
         var color = color_blue
 
         for (var i = 0; i < data.length; i++) {
@@ -142,6 +144,9 @@ $(window).on('load', function() {
             
             if (data[i].type == "Actual"){
                 color = color_red
+            }
+            else{
+                color = color_blue
             }
 
 
