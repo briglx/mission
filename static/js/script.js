@@ -128,9 +128,45 @@ function createCustomClusteredPin(cluster){
 }
 
 
+function abortTimer() { 
+    clearInterval(tid);
+}
+
+var count = 0
+function logCssElement() {
+
+    var el = document.getElementById("searchBox");
+
+    // var el = $("#searchBox")
+    console.log(el)
+    console.log("Computed Styles CSs Text...")
+    console.log(window.getComputedStyle(el).cssText)
+    console.log("Computed Styles...")
+    console.log(window.getComputedStyle(el))
+    
+    // console.log(el.attr('style'))
+    // console.log($("#searchBox").css())
+
+    // for (var i=0;i<$("#searchBox").css().length;i++) {
+    //     console.log(el.css()[i])
+    // }
+
+    if (count > 3){
+        abortTimer()
+    }
+
+    count = count + 1
+   
+}
+
+
+var tid;
 $(window).on('load', function() {
 
-
+    tid = setInterval(logCssElement, 5000);
+    console.log("Timer ID: " + tid)
+    
+    
     
 
     // Show saved predictions
