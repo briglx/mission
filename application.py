@@ -111,7 +111,7 @@ def get_predictions():
 @app.route("/")
 def home():
     """Home route for main page."""
-    config = {"map_api_key": map_api_key, "version": "1.3"}
+    config = {"map_api_key": map_api_key, "version": "1.4"}
     return render_template("pages/home.html", config=config)
 
 @app.route('/favicon.ico')
