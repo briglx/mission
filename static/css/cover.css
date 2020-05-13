@@ -102,6 +102,14 @@ h1, h2, h3 {
   font-family: 'Roboto', sans-serif;
 }
 
+a {
+  color: white;
+}
+
+a:hover {
+  color: #0055A4;
+}
+
 .site-wrapper{
   padding: 0 20px;
   overflow: hidden;
@@ -120,6 +128,10 @@ h1, h2, h3 {
   z-index: 100;
 }
 
+.playerContainer .link{
+  float:left;
+}
+
 
 input.form-control{
   padding: 7px 0px 7px 0;
@@ -133,6 +145,15 @@ input.form-control{
   margin-bottom:10px;
   box-sizing: content-box;
 
+}
+
+.home{
+  text-align: left;
+  margin: auto;
+  width: 50%;
+  sbackground-color: red;
+  padding: 10px;
+  font-size: x-large;
 }
 
 /* div#playerContainer input#searchBox{

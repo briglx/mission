@@ -114,6 +114,12 @@ def home():
     config = {"map_api_key": map_api_key, "version": "1.5"}
     return render_template("pages/home.html", config=config)
 
+@app.route("/map")
+def map():
+    """Home route for main page."""
+    config = {"map_api_key": map_api_key, "version": "1.5"}
+    return render_template("pages/map.html", config=config)
+
 @app.route('/favicon.ico')
 def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static', 'ico'),

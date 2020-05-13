@@ -1,0 +1,21 @@
+{% extends 'layouts/main.html' %}
+{% block title %}Map{% endblock %}
+{% block content %}
+
+
+
+  <div class="playerContainer" id="playerContainer">
+    <h1 class="link"><a href="/">Back</a></h1>
+    <h1>Enter Your Prediction</h1>
+    <input type="text" class="form-control playerName round" id="playerName" placeholder="Type in your name">
+    <input type="text" class="form-control" id="searchBox" placeholder="Type in your Guess">
+    <div id='searchBoxContainer'></div>
+  </div>
+
+
+<div class="mapContainer">
+  <div id="myMap"></div>
+</div>  
+
+
+{% endblock %}
