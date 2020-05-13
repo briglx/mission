@@ -147,14 +147,7 @@ input.form-control{
 
 }
 
-.home{
-  text-align: left;
-  margin: auto;
-  width: 50%;
-  sbackground-color: red;
-  padding: 10px;
-  font-size: x-large;
-}
+
 
 /* div#playerContainer input#searchBox{
   border-bottom-left-radius: 0px;
@@ -188,6 +181,15 @@ input.form-control{
   .form-control {
     border-radius: 25px 
   }
+
+  .home{
+    text-align: left;
+    margin: auto;
+    width: 90%;
+    sbackground-color: red;
+    padding: 10px;
+    font-size: x-large;
+  }
   
 }
 
@@ -195,4 +197,13 @@ input.form-control{
   .form-control {
     border-radius: 0px 
   } 
+
+  .home{
+    text-align: left;
+    margin: auto;
+    width: 50%;
+    sbackground-color: red;
+    padding: 10px;
+    font-size: x-large;
+  }
 }

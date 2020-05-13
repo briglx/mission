@@ -10,6 +10,8 @@ import psycopg2
 
 app = Flask(__name__)
 
+version = 1.6
+
 map_api_key = os.environ.get("MAP_API_KEY") or "MISISNG"
 db_conn = os.environ.get("DB_CONN_STRING") or "MISSING"
 
@@ -111,13 +113,13 @@ def get_predictions():
 @app.route("/")
 def home():
     """Home route for main page."""
-    config = {"map_api_key": map_api_key, "version": "1.5"}
+    config = {"map_api_key": map_api_key, "version": version}
     return render_template("pages/home.html", config=config)
 
 @app.route("/map")
 def map():
     """Home route for main page."""
-    config = {"map_api_key": map_api_key, "version": "1.5"}
+    config = {"map_api_key": map_api_key, "version": version}
     return render_template("pages/map.html", config=config)
 
 @app.route('/favicon.ico')
