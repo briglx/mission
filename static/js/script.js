@@ -20,7 +20,6 @@ function selectedSuggestion(suggestionResult) {
         zoom: 5
     });
 
-
     map.entities.clear();
     var pushpin = new Microsoft.Maps.Pushpin(suggestionResult.location,
         {
@@ -133,6 +132,56 @@ function abortTimer() {
 }
 
 var count = 0
+
+function updateMap(){
+    console.log("Update map")
+
+    // Show saved predictions
+    $.get("/api/predictions", function(data ){
+        // Add pin to map
+        
+        var color = color_blue
+
+        // Clear out predictions
+        predictions = [];
+        for (var i = 0; i < data.length; i++) {
+            var loc = new Microsoft.Maps.Location(data[i].latitude, data[i].longitude)
+            
+            if (data[i].type == "Actual"){
+                color = color_red
+            }
+            else{
+                color = color_blue
+            }
+
+            var pushpin = new Microsoft.Maps.Pushpin(loc, {
+                title: data[i].name,
+                subTitle: data[i].location,
+                text: "",
+                color: color
+            });
+            predictions.push(pushpin)
+        }
+
+        // clear layers
+        map.layers.clear();
+
+        Microsoft.Maps.loadModule("Microsoft.Maps.Clustering", function () {
+            console.log("Clustering loaded ")
+
+            // var pins = Microsoft.Maps.TestDataGenerator.getPushpins(1000, map.getBounds());
+
+            clusterLayer = new Microsoft.Maps.ClusterLayer(predictions, {
+                clusteredPinCallback: createCustomClusteredPin});
+            map.layers.insert(clusterLayer);
+        });
+
+    });
+
+
+}
+
+
 function logCssElement() {
 
     var el = document.getElementById("searchBox");
@@ -163,55 +212,11 @@ function logCssElement() {
 var tid;
 $(window).on('load', function() {
 
-    tid = setInterval(logCssElement, 5000);
-    console.log("Timer ID: " + tid)
+    updateMap();
+    // tid = setInterval(updateMap, 5000);
+    // console.log("Timer ID: " + tid)
+
     
-    
-    
-
-    // Show saved predictions
-    $.get("/api/predictions", function(data ){
-        // Add pin to map
-        
-        var color = color_blue
-
-        for (var i = 0; i < data.length; i++) {
-            var loc = new Microsoft.Maps.Location(data[i].latitude, data[i].longitude)
-            
-            if (data[i].type == "Actual"){
-                color = color_red
-            }
-            else{
-                color = color_blue
-            }
-
-
-            var pushpin = new Microsoft.Maps.Pushpin(loc, {
-                title: data[i].name,
-                subTitle: data[i].location,
-                text: "",
-                color: color
-            });
-            predictions.push(pushpin)
-        }
-
-        
-        // map.entities.push(predictions)
-        console.log(predictions)
-
-
-        Microsoft.Maps.loadModule("Microsoft.Maps.Clustering", function () {
-            console.log("Clustering loaded ")
-
-            var pins = Microsoft.Maps.TestDataGenerator.getPushpins(1000, map.getBounds());
-
-            clusterLayer = new Microsoft.Maps.ClusterLayer(predictions, {
-                clusteredPinCallback: createCustomClusteredPin});
-            map.layers.insert(clusterLayer);
-        });
-
-    });
-
     // Add auto suggest to search
     Microsoft.Maps.loadModule('Microsoft.Maps.AutoSuggest', function () {
         var options = {
@@ -221,8 +226,6 @@ $(window).on('load', function() {
         var manager = new Microsoft.Maps.AutosuggestManager(options);
         manager.attachAutosuggest('#searchBox', '#searchBoxContainer', selectedSuggestion);
     });
-
-    
 
 });
 

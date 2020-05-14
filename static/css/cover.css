@@ -147,6 +147,11 @@ input.form-control{
 
 }
 
+.overview #myMap {
+  height: 100vh;
+  background-color: #a9a9a9;
+  width: 100%; 
+}
 
 
 /* div#playerContainer input#searchBox{
